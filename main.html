@@ -10,6 +10,9 @@
       margin: 10px 0;
       border: 1px solid #ccc;
       width: 300px;
+      font-size: 16px;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
     }
     .valid {
       background-color: lightgreen;
@@ -25,41 +28,20 @@
 
   <form id="validationForm">
     <label for="name">Name:</label>
-    <input type="text" id="name" name="name" placeholder="Enter your name" oninput="validateInput('name')">
+    <input type="text" id="name" name="name" placeholder="Enter your name" 
+      oninput="this.className = /^[A-Za-z]{3,}$/.test(this.value) ? 'valid' : 'invalid'">
     <br><br>
 
     <label for="email">Email:</label>
-    <input type="text" id="email" name="email" placeholder="Enter your email" oninput="validateInput('email')">
+    <input type="text" id="email" name="email" placeholder="Enter your email" 
+      oninput="this.className = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(this.value) ? 'valid' : 'invalid'">
     <br><br>
 
     <label for="mobile">Mobile:</label>
-    <input type="text" id="mobile" name="mobile" placeholder="Enter your mobile number" oninput="validateInput('mobile')">
+    <input type="text" id="mobile" name="mobile" placeholder="Enter your mobile number" 
+      oninput="this.className = /^[0-9]{10}$/.test(this.value) ? 'valid' : 'invalid'">
     <br><br>
   </form>
-
-  <script>
-    // Regular expressions for validation
-    const patterns = {
-      name: /^[A-Za-z]{3,}$/,
-      email: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/,
-      mobile: /^[0-9]{10}$/
-    };
-
-    // Function to validate inputs
-    function validateInput(inputId) {
-      const input = document.getElementById(inputId);
-      const value = input.value;
-      
-      // Check if the input value matches the corresponding regex pattern
-      if (patterns[inputId].test(value)) {
-        input.classList.remove('invalid');
-        input.classList.add('valid');
-      } else {
-        input.classList.remove('valid');
-        input.classList.add('invalid');
-      }
-    }
-  </script>
 
 </body>
 </html>
